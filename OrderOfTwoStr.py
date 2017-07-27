@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 # 问题：检查乱序字符串，我们假设两个字符串具有相等长度，且由26个小写字母集合组成。
 # 例如：'heart'与'earth'、'python'与'typhon'，分别都是乱序字符串。
 # 目标：写一个布尔函数，将两个字符串作为参数，并返回它们是不是乱序字符串。
@@ -30,4 +33,24 @@ def Solution1(s1, s2):
 print(Solution1('baco', 'ocab'))
 
 # 2 方法2：排序和比较。复杂度
-# 步骤：
+# 步骤：首先，按照字母顺序从a->z排列每个字符串，如果两个字符串相同，则True。但是调用Python的排序也是需要成本。
+
+def Solution2(s1, s2):
+	alist1 = list(s1)
+	alist2 = list(s2)
+
+	alist1.sort()
+	alist2.sort()
+
+	pos = 0
+	matches = True
+
+	while pos < len(s1) and matches:
+		if alist1[pos] == alist2[pos]:
+			pos += 1
+		else:
+			matches = False
+
+	return matches
+
+print(Solution2('abcp', 'pbac'))
