@@ -32,8 +32,8 @@ def Solution1(s1, s2):
 
 print(Solution1('baco', 'ocab'))
 
-# 2 方法2：排序和比较。复杂度
-# 步骤：首先，按照字母顺序从a->z排列每个字符串，如果两个字符串相同，则True。但是调用Python的排序也是需要成本。
+# 2 方法2：排序和比较。复杂度与法1有同样的量级
+# 步骤：首先，按照字母顺序从a->z排列每个字符串，如果两个字符串相同，则True。但是调用Python的【排序】也是需要成本。
 
 def Solution2(s1, s2):
 	alist1 = list(s1)
@@ -54,3 +54,29 @@ def Solution2(s1, s2):
 	return matches
 
 print(Solution2('abcp', 'pbac'))
+
+# 3 方法3：计数和比较。两个迭代都是n，第三个迭代比较两个计数列表，需要26步。一共T(n)=2n+26。复杂度O(n)。
+# 步骤：计算每个字母出现的次数，由于有26个可能的字符，就用一个长度为26的列表，每个可能的字符占一个位置，
+# 每次看到一个特定的字符，就增加该位置的计数器。最后，如果两个列表的计数器一样，则字符串为乱序字符串。
+
+def Solution3(s1, s2):
+	c1 = [0]*26
+	c2 = [0]*26
+
+	for i in range(len(s1)):
+		pos = ord(s1[i]) - ord('a')
+		c1[pos] = c1[pos] + 1
+	for i in range(len(s2)):
+		pos = ord(s2[i]) - ord('a')
+		c2[pos] = c2[pos] + 1
+
+	j = 0
+	stillOK = True
+	while j<26 and stillOK:
+		if c1[j]==c2[j]:
+			j = j + 1
+		else:
+			stillOK = False
+	return stillOK
+
+print(Solution3('apple','pleap'))
