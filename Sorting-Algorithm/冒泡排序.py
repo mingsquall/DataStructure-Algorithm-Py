@@ -8,13 +8,11 @@
 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
 """
 def bubbleSort(list):
-	for i in range(0, len(list)):
+	for i in range(0, len(list)-1):
 		for j in range(1, len(list)-i):
-			if list[j-1] > list[j]: # 如果前者比后者大，则交换两者
-				temp = list[j-1]
-				list[j-1] = list[j]
-				list[j] = temp
+			if list[j-1] > list[j]:
+				list[j-1], list[j] = list[j], list[j-1]
 	return list
 
 if __name__ == '__main__':
-	print(bubbleSort([3,5,1,9,0,10,12,51]))
+	print(bubbleSort([3,5,1,9,15,10,2,100,54,31]))
